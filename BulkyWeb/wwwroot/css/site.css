@@ -8,9 +8,11 @@ a.navbar-brand {
 }
 
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
     color: rgba(255, 255, 255, 0.55);
 }
 
