@@ -1,9 +1,12 @@
 using Bulky.DataAccess.Repository;
 using Bulky.DataAccess.Repository.IRepository;
+using Bulky.Utility;
 using BulkyWeb.DataAcess.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +33,18 @@ namespace BulkyWeb
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddRazorPages();
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
@@ -52,7 +67,7 @@ namespace BulkyWeb
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();       
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -60,6 +75,11 @@ namespace BulkyWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
             });
         }
     }
