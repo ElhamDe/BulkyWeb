@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ namespace BulkyWeb
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
@@ -65,7 +68,7 @@ namespace BulkyWeb
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe:SecretKey").Get<string>();
             app.UseRouting();
             app.UseAuthentication();       
             app.UseAuthorization();
