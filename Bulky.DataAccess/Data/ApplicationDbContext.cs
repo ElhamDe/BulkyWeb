@@ -41,32 +41,32 @@ namespace BulkyWeb.DataAcess.Data
                 new Company
                 {
                     Id = 1,
-                    Name = "Tech Solution",
-                    StreetAddress = "123 Tech St",
-                    City = "Tech City",
-                    PostalCode = "12121",
-                    State = "IL",
-                    PhoneNumber = "6669990000"
+                    Name = "Global CT",
+                    StreetAddress = "Hyzri Talla nr. 58",
+                    City = "Prishtina",
+                    PostalCode = "10000",
+                    State = "Kosova",
+                    PhoneNumber = "+383 38 773 777"
                 },
                 new Company
                 {
                     Id = 2,
-                    Name = "Vivid Books",
-                    StreetAddress = "999 Vid St",
-                    City = "Vid City",
-                    PostalCode = "66666",
-                    State = "IL",
-                    PhoneNumber = "7779990000"
+                    Name = "Gjirafa, Inc",
+                    StreetAddress = "Magjistralja Prishtine - Ferizaj",
+                    City = "Prishtina",
+                    PostalCode = "10000",
+                    State = "Kosova",
+                    PhoneNumber = "+383 44 991 206"
                 },
                 new Company
                 {
                     Id = 3,
-                    Name = "Readers Club",
-                    StreetAddress = "999 Main St",
-                    City = "Lala land",
-                    PostalCode = "99999",
-                    State = "NY",
-                    PhoneNumber = "1113335555"
+                    Name = "Starlabs",
+                    StreetAddress = "33 Ukshin Hoti",
+                    City = "Prishtina",
+                    PostalCode = "10000",
+                    State = "Kosova",
+                    PhoneNumber = "+383 45 301 502"
                 }
                 );
 
